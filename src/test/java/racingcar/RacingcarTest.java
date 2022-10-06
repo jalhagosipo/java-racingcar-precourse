@@ -1,6 +1,8 @@
 package racingcar;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -42,5 +44,13 @@ public class RacingcarTest {
         race.setMoveCount(moveCount);
 
         assertThat(race.getMoveCount()).isEqualTo(moveCount);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0:0", "1:0", "2:0", "3:0", "4:1", "5:1", "6:1", "7:1", "8:1", "9:1"}, delimiter = ':')
+    void 한_번의_이동에_전진_또는_멈추는_행동을_할_수_있다(int number, int expected) {
+        Car car = new Car("ping1");
+        car.setRandomNumber(number);
+        assertThat(car.move()).isEqualTo(expected);
     }
 }
