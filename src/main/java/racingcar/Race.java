@@ -6,6 +6,7 @@ import java.util.List;
 public class Race {
 
     private List<Car> cars = new ArrayList();
+    private int moveCount;
 
     public Race(String input) {
         String[] names = input.split(",");
@@ -29,5 +30,13 @@ public class Race {
 
     public List<Car> getCars() {
         return cars;
+    }
+
+    public void setMoveCount(int moveCount) {
+        this.moveCount = moveCount;
+    }
+
+    public int getMoveCount() {
+        return this.moveCount;
     }
 }

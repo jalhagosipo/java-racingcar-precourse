@@ -31,4 +31,16 @@ public class RacingcarTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
+
+    @Test
+    void 몇_번의_이동을_할_것인지_입력할_수_있다() {
+        String[] names = new String[]{"ping1", "ping2", "ping3"};
+        String input = String.join(",", names);
+        int moveCount = 5;
+
+        Race race = new Race(input);
+        race.setMoveCount(moveCount);
+
+        assertThat(race.getMoveCount()).isEqualTo(moveCount);
+    }
 }
