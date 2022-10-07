@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -52,5 +54,24 @@ public class RacingcarTest {
         Car car = new Car("ping1");
         car.setRandomNumber(number);
         assertThat(car.move()).isEqualTo(expected);
+    }
+
+    @Test
+    void 레이싱에서_누가_우승했는지_알려준다() {
+        String[] names = new String[]{"ping1", "ping2", "ping3"};
+        String input = String.join(",", names);
+        Map<Integer, Map<String, Integer>> raceMap = new HashMap<>();
+        Map<String, Integer> roundMap = new HashMap<>();
+        roundMap.put("ping1", 1);
+        roundMap.put("ping2", 1);
+        roundMap.put("ping3", 1);
+        raceMap.put(1, roundMap);
+        int moveCount = 1;
+
+        Race race = new Race(input);
+        race.setMoveCount(moveCount);
+        race.setRaceMap(raceMap);
+
+        assertThat(race.getWinners()).contains("ping1", "ping2", "ping3");
     }
 }

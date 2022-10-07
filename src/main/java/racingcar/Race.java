@@ -1,12 +1,15 @@
 package racingcar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Race {
 
     private List<Car> cars = new ArrayList();
     private int moveCount;
+    private Map<Integer, Map<String, Integer>> raceMap;
 
     public Race(String input) {
         String[] names = input.split(",");
@@ -36,7 +39,54 @@ public class Race {
         this.moveCount = moveCount;
     }
 
+    public void setRaceMap(Map<Integer, Map<String, Integer>> raceMap) {
+        this.raceMap = raceMap;
+    }
+
     public int getMoveCount() {
         return this.moveCount;
+    }
+
+    public void run() {
+        raceMap = new HashMap<>();
+
+        for (int i = 1; i <= moveCount; i++) {
+            Map<String, Integer> roundMap = roundStart();
+            raceMap.put(i, roundMap);
+        }
+    }
+
+    private Map<String, Integer> roundStart() {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            int distance = car.move();
+            map.put(car.getName(), distance);
+        }
+
+        return map;
+    }
+
+    public List getWinners() {
+        Map<String, Integer> roundMap = raceMap.get(moveCount);
+        List<String> keySet = new ArrayList<>(roundMap.keySet());
+        List winners = new ArrayList();
+        int winnerDistance = 0;
+
+        for (String key : keySet) {
+            int distance = roundMap.get(key);
+            if (winnerDistance < distance) {
+                winnerDistance = distance;
+                winners.clear();
+                winners.add(key);
+            } else if (winnerDistance == distance) {
+                winners.add(key);
+            } else {
+
+            }
+        }
+
+        return winners;
     }
 }
