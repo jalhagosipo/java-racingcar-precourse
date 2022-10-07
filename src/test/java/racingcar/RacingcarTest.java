@@ -60,17 +60,17 @@ public class RacingcarTest {
     void 레이싱에서_누가_우승했는지_알려준다() {
         String[] names = new String[]{"ping1", "ping2", "ping3"};
         String input = String.join(",", names);
-        Map<Integer, Round> raceMap = new HashMap<>();
+        Map<Integer, Round> race = new HashMap<>();
         Map<String, Integer> round = new HashMap<>();
         round.put("ping1", 1);
         round.put("ping2", 1);
         round.put("ping3", 1);
-        raceMap.put(1, new Round(round));
+        race.put(1, new Round(round));
         int moveCount = 1;
 
         RaceGame raceGame = new RaceGame(input);
         raceGame.setMoveCount(moveCount);
-        raceGame.setRaceMap(raceMap);
+        raceGame.setRace(new Race(race));
 
         assertThat(raceGame.getWinners()).contains("ping1", "ping2", "ping3");
     }

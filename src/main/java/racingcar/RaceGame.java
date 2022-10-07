@@ -6,7 +6,7 @@ public class RaceGame {
 
     private List<Car> cars = new ArrayList();
     private int moveCount;
-    private Map<Integer, Round> raceMap;
+    private Race race;
 
     public RaceGame(String input) {
         String[] names = input.split(",");
@@ -36,8 +36,8 @@ public class RaceGame {
         this.moveCount = moveCount;
     }
 
-    public void setRaceMap(Map<Integer, Round> raceMap) {
-        this.raceMap = raceMap;
+    public void setRace(Race race) {
+        this.race = race;
     }
 
     public int getMoveCount() {
@@ -45,12 +45,13 @@ public class RaceGame {
     }
 
     public void run() {
-        raceMap = new HashMap<>();
+        Map<Integer, Round> map = new HashMap<>();
 
         for (int i = 1; i <= moveCount; i++) {
-            Round roundMap = roundStart();
-            raceMap.put(i, roundMap);
+            Round round = roundStart();
+            map.put(i, round);
         }
+        this.race = new Race(map);
     }
 
     private Round roundStart() {
@@ -66,7 +67,7 @@ public class RaceGame {
     }
 
     public List getWinners() {
-        Round round = raceMap.get(moveCount);
+        Round round = race.getLastRound();
         Set<String> racerNames = round.getRacerNames();
         List winners = new ArrayList();
         int winnerDistance = 0;
