@@ -2,13 +2,13 @@ package racingcar;
 
 import java.util.*;
 
-public class Race {
+public class RaceGame {
 
     private List<Car> cars = new ArrayList();
     private int moveCount;
     private Map<Integer, Round> raceMap;
 
-    public Race(String input) {
+    public RaceGame(String input) {
         String[] names = input.split(",");
         validateNames(names);
         for (int i = 0; i < names.length; i++) {

@@ -18,8 +18,8 @@ public class RacingcarTest {
         String[] names = new String[]{"ping1", "ping2", "ping3"};
         String input = String.join(",", names);
 
-        Race race = new Race(input);
-        List<Car> cars = race.getCars();
+        RaceGame raceGame = new RaceGame(input);
+        List<Car> cars = raceGame.getCars();
 
         for (int i = 0; i<cars.size(); i++) {
             assertThat(cars.get(i).getName()).isEqualTo(names[i]);
@@ -31,7 +31,7 @@ public class RacingcarTest {
         String[] names = new String[]{"ping1", "ping2", "ping1123123"};
         String input = String.join(",", names);
 
-        assertThatThrownBy(() -> new Race(input))
+        assertThatThrownBy(() -> new RaceGame(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -42,10 +42,10 @@ public class RacingcarTest {
         String input = String.join(",", names);
         int moveCount = 5;
 
-        Race race = new Race(input);
-        race.setMoveCount(moveCount);
+        RaceGame raceGame = new RaceGame(input);
+        raceGame.setMoveCount(moveCount);
 
-        assertThat(race.getMoveCount()).isEqualTo(moveCount);
+        assertThat(raceGame.getMoveCount()).isEqualTo(moveCount);
     }
 
     @ParameterizedTest
@@ -68,10 +68,10 @@ public class RacingcarTest {
         raceMap.put(1, new Round(round));
         int moveCount = 1;
 
-        Race race = new Race(input);
-        race.setMoveCount(moveCount);
-        race.setRaceMap(raceMap);
+        RaceGame raceGame = new RaceGame(input);
+        raceGame.setMoveCount(moveCount);
+        raceGame.setRaceMap(raceMap);
 
-        assertThat(race.getWinners()).contains("ping1", "ping2", "ping3");
+        assertThat(raceGame.getWinners()).contains("ping1", "ping2", "ping3");
     }
 }
