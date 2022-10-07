@@ -44,14 +44,16 @@ public class RaceGame {
         return this.moveCount;
     }
 
-    public void run() {
+    public Race run() {
         Map<Integer, Round> map = new HashMap<>();
 
         for (int i = 1; i <= moveCount; i++) {
             Round round = roundStart();
             map.put(i, round);
         }
+
         this.race = new Race(map);
+        return this.race;
     }
 
     private Round roundStart() {

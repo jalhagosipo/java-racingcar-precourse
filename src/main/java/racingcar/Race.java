@@ -13,4 +13,12 @@ public class Race {
     public Round getLastRound() {
         return race.get(race.size());
     }
+
+    public int getSize() {
+        return race.size();
+    }
+
+    public Round getRound(int index) {
+        return race.get(index);
+    }
 }
