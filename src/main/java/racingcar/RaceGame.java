@@ -73,18 +73,21 @@ public class RaceGame {
         Set<String> racerNames = round.getRacerNames();
         List winners = new ArrayList();
         int winnerDistance = 0;
-
         for (String racer : racerNames) {
             int distance = round.getDistance(racer);
-            if (winnerDistance < distance) {
-                winnerDistance = distance;
-                winners.clear();
-                winners.add(racer);
-            } else if (winnerDistance == distance) {
-                winners.add(racer);
-            }
+            winnerDistance = compareDistanceAndSetWinners(winners, winnerDistance, racer, distance);
         }
-
         return winners;
+    }
+
+    private int compareDistanceAndSetWinners(List winners, int winnerDistance, String racer, int distance) {
+        if (winnerDistance < distance) {
+            winnerDistance = distance;
+            winners.clear();
+            winners.add(racer);
+        } else if (winnerDistance == distance) {
+            winners.add(racer);
+        }
+        return winnerDistance;
     }
 }
